@@ -159,12 +159,6 @@ public class GameController : MonoBehaviour
         Instantiate(island);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // Event Handlers
     public void OnStartButtonClick()
     {
