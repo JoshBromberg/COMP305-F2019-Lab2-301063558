@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0741822c7c977e4dbeeb3f8f4e90b31, type: 3}
   m_Name: GameScreenSettings
   m_EditorClassIdentifier: 
+  scene: 1
   activeSoundClip: 0
   scoreLabelEnabled: 1
   livesLabelEnabled: 1

@@ -499,6 +499,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
         type: 3}
+      propertyPath: sceneSettings.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
       propertyPath: livesLabel
       value: 
       objectReference: {fileID: 748744465}
@@ -517,6 +522,24 @@ PrefabInstance:
       propertyPath: scoreBoard
       value: 
       objectReference: {fileID: 11400000, guid: f3fb3d0f3a4169847a1809b0128e05b7,
+        type: 2}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
+      propertyPath: sceneSettings.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 806c573bd9175fc49a8c2f77189fa5e2,
+        type: 2}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
+      propertyPath: sceneSettings.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 861fab7666b4f7a428bb87b453d22095,
+        type: 2}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
+      propertyPath: sceneSettings.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4dc887f61a8d95147beca1a1976783fc,
         type: 2}
     - target: {fileID: 6258031004218500823, guid: 0cd6714592b08874d95701663d2115fa,
         type: 3}

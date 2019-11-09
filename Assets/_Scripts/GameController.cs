@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
-
+using System.Linq;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -39,6 +40,10 @@ public class GameController : MonoBehaviour
     public GameObject endLabel;
     public GameObject restartButton;
 
+    [Header("Scene Settings")]
+    public SceneSettings activeSceneSettings;
+    public List<SceneSettings> sceneSettings;
+
     // public properties
     public int Lives
     {
@@ -50,7 +55,8 @@ public class GameController : MonoBehaviour
         set
         {
             _lives = value;
-            if(_lives < 1)
+            scoreBoard.lives = value;
+            if (_lives < 1)
             {
                 
                 SceneManager.LoadScene("End");
@@ -73,6 +79,7 @@ public class GameController : MonoBehaviour
         set
         {
             _score = value;
+            scoreBoard.score = value;
 
 
             if (scoreBoard.highScore < _score)
@@ -106,36 +113,28 @@ public class GameController : MonoBehaviour
 
     private void SceneConfiguration()
     {
-        switch (SceneManager.GetActiveScene().name)
+        Scene sceneToCompare = (Scene)Enum.Parse(typeof(Scene), value: SceneManager.GetActiveScene().name.ToUpper());
+
+        var query = from settings in sceneSettings where settings.scene == sceneToCompare select settings;
+        activeSceneSettings = query.ToList().FirstOrDefault();
         {
-            case "Start":
-                scoreLabel.enabled = false;
-                livesLabel.enabled = false;
-                highScoreLabel.enabled = false;
-                endLabel.SetActive(false);
-                restartButton.SetActive(false);
-                activeSoundClip = SoundClip.NONE;
-                break;
-            case "Main":
-                highScoreLabel.enabled = false;
-                startLabel.SetActive(false);
-                startButton.SetActive(false);
-                endLabel.SetActive(false);
-                restartButton.SetActive(false);
-                activeSoundClip = SoundClip.ENGINE;
-                break;
-            case "End":
-                scoreLabel.enabled = false;
-                livesLabel.enabled = false;
-                startLabel.SetActive(false);
-                startButton.SetActive(false);
-                activeSoundClip = SoundClip.NONE;
-                highScoreLabel.text = "High Score: " + scoreBoard.highScore;
-                break;
+            scoreLabel.enabled = activeSceneSettings.scoreLabelEnabled;
+            livesLabel.enabled = activeSceneSettings.livesLabelEnabled;
+            highScoreLabel.enabled = activeSceneSettings.highScoreLabelEnabled;
+            endLabel.SetActive(activeSceneSettings.endLabelActive);
+            restartButton.SetActive(activeSceneSettings.restartButtonActive);
+            activeSoundClip = activeSceneSettings.activeSoundClip;
+            startLabel.SetActive(activeSceneSettings.startLabelActive);
+            startButton.SetActive(activeSceneSettings.startButtonActive);
+            livesLabel.text = "Lives: " + scoreBoard.lives;
+            scoreLabel.text = "Score: "+scoreBoard.score;
+            highScoreLabel.text = "High Score: " + scoreBoard.highScore;
         }
 
-        Lives = 5;
-        Score = 0;
+        if (activeSceneSettings.scene == Scene.MAIN) {
+            Lives = 5;
+            Score = 0;
+        }
 
 
         if ((activeSoundClip != SoundClip.NONE) && (activeSoundClip != SoundClip.NUM_OF_CLIPS))
