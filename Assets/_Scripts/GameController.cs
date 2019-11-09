@@ -169,7 +169,6 @@ public class GameController : MonoBehaviour
     // Event Handlers
     public void OnStartButtonClick()
     {
-        DontDestroyOnLoad(scoreBoard);
         SceneManager.LoadScene("Main");
     }
 
